@@ -1,35 +1,37 @@
-
-// console.log(randoNum);
 /**
  * @param {string} s
  * @return {number}
  */
-
+//established function for excersize
 var romanToInt = function (s) {
-  //establish score
+  //keep track of value
   let score = 0;
-  ///read through string
-  for (let i = 0; i < s.length; i++) {
-    // situations for each character
-    switch (s.charAt(i)) {
-      //I needs an exception as it's value is based on where the V is
+  //split input to array to use array functions
+  let romArray = s.split("");
+
+  //iterator for array values without "i"
+  //using new tools
+  for (const romanNum of romArray) {
+    //romanNum is the value of the current input letter
+    switch (romanNum) {
+      //go through each case
+
+
+      /**
+       * if the number in fron of it has a higher value
+       * it a subtraction
+       */
       case "I":
-        if (s.search("V") >= 0) {
-          console.log("index of i is: " + i);
-          if (s.indexOf("V") < i) {
-            console.log("index of i is: " + i);
-            score -= 1;
-          } else if (s.indexOf("V") > i) {
-            console.log("index of i is: " + i);
-            score += 1;
-          }
-          console.log(" A V IS PRESENT at : " + s.indexOf("V"));
-          console.log();
-        } else {
+        //if an I is present at the end of a string....
+        if (s.endsWith("I")) {
+          //ad 1
           score += 1;
+        } else {
+          ///otherwise, subtract 1
+          score -= 1;
         }
-        // score += 1;
         break;
+      //rest of the values
       case "V":
         score += 5;
         break;
@@ -51,15 +53,10 @@ var romanToInt = function (s) {
       default:
         break;
     }
-    console.log(score);
   }
-  // const Roman = ["I", "V", "X", "L", "C", "D", "M"];
-  console.log("Final Score is " + score); // const value = [1, 5, 10, 50, 100, 500, 1000];
+  //return the score for example
+  console.log(score);
+  return score;
 };
-
-romanToInt("MMMIIIIV");
-/*
-1 <= s.length <= 15
-s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
-It is guaranteed that s is a valid roman numeral in the range [1, 3999].
-*/
+///tesable vall to function
+romanToInt("MCMXCIV");
