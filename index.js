@@ -9,54 +9,41 @@ var romanToInt = function (s) {
   //split input to array to use array functions
   let romArray = s.split("");
 
-  //iterator for array values without "i"
-  //using new tools
-  for (const romanNum of romArray) {
-    //romanNum is the value of the current input letter
-    switch (romanNum) {
-      //go through each case
-
-
+  const Romans = [
+    ["I", 1],
+    ["V", 5],
+    ["X", 10],
+    ["L", 50],
+    ["C", 100],
+    ["D", 500],
+    ["M", 1000],
+    []
+  ];
+  // console.log(Romans[0][0]);
+  romArray.forEach((romNum) => {
+    //really tried not to use a for loop, but... needed to cycle through values
+    //and didn't know any other way to.
+    for (let i = 0; i < Romans.length; i++) {
       /**
-       * if the number in fron of it has a higher value
-       * it a subtraction
+       * What's wanted is if(romArray value matches corresponding Romans name AND
+       * there's not a Item with more value than itself in Romans IN the rest of romArray
+       * Then add it's value. If there is, subtract that value. )
        */
-      case "I":
-        //if an I is present at the end of a string....
-        if (s.endsWith("I")) {
-          //ad 1
-          score += 1;
-        } else {
-          ///otherwise, subtract 1
-          score -= 1;
-        }
-        break;
-      //rest of the values
-      case "V":
-        score += 5;
-        break;
-      case "X":
-        score += 10;
-        break;
-      case "L":
-        score += 50;
-        break;
-      case "C":
-        score += 100;
-        break;
-      case "D":
-        score += 500;
-        break;
-      case "M":
-        score += 1000;
-        break;
-      default:
-        break;
+      if (romNum === Romans[i][0]) {
+        console.log(`Superior of ${romNum} is ${Romans[i + 1][0]}`);
+        console.log(`Next item after ${romNum} is ${Object.keys(romNum)}`);
+
+        // console.log(Romans[i][0] + " + " + s.indexOf(i) + " + " + s.length);
+        score += Romans[i][1];
+      } else if (romNum === Romans[i][0] && s.indexOf(romNum) < s.indexOf(i)) {
+        score -= Romans[i][1];
+      }
     }
-  }
+  });
+
   //return the score for example
   console.log(score);
   return score;
 };
 ///tesable vall to function
-romanToInt("MCMXCIV");
+romanToInt("MD");
